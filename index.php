@@ -12,7 +12,7 @@ use \Slim\App;
 /* Database configuration */
 $dbhost = '127.0.0.1';        
 $dbuser = 'root';				/* Input your username here */
-$dbpass  = 'alvin206';					/* Input your password here */
+$dbpass  = '';					/* Input your password here */
 $dbname = 'db_mahasiswa';
 $dbmethod = 'mysql:dbname=';
 
@@ -88,22 +88,6 @@ $app->post('/matkul', function($request, $response, $args) use($app, $db) {
 	} else {
 		$responseJson["error"] = true;
 		$responseJson["message"] = "Gagal menambahkan ke database";
-		echo json_encode($responseJson);
-	}
-});
-
-$app->put('/matkul/{id}', function($request, $response, $args) use($app, $db) {
-	$matkul = $db->tbl_matkul()->where('id' , $args);
-
-	if ($matkul->fetch()) {
-		$post = $matkul->put();
-		$result = $matkul->update($post);
-		$responseJson["error"] = (bool)$result;
-		$responseJson["message"] = "Berhasil mengupdate data";
-		echo json_encode($responseJson);
-	} else {
-		$responseJson["error"] = true;
-		$responseJson["message"] = "Gagal mengupdate data";
 		echo json_encode($responseJson);
 	}
 });
